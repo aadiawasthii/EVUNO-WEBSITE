@@ -1,0 +1,79 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { useCart } from "@/components/cart/cart-provider";
+import { buttonStyles } from "@/components/ui/button";
+import { KeyedVideoLogo } from "@/components/ui/keyed-video-logo";
+import { cn } from "@/lib/utils";
+
+const navigation = [
+  { href: "/shop", label: "Shop" },
+  { href: "/brand", label: "Brand" },
+  { href: "/series-01", label: "Series 01" }
+];
+
+export function SiteHeader() {
+  const pathname = usePathname();
+  const { itemCount, toggleCart } = useCart();
+  const isHome = pathname === "/";
+
+  return (
+    <header className="sticky top-0 z-30 overflow-visible bg-abyss/70 backdrop-blur-xl">
+      <div className="shell relative flex min-h-24 items-center justify-end gap-3 overflow-visible sm:gap-5">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex items-center gap-3 sm:gap-5">
+          <div className="h-px flex-1 bg-white/30" />
+          <div className={cn(isHome ? "w-28 sm:w-40 lg:w-56" : "w-24 sm:w-32 lg:w-40")} />
+          <div className="h-px flex-1 bg-white/30" />
+        </div>
+
+        <Link
+          href="/"
+          aria-label="Go to homepage"
+          className={cn(
+            "group absolute left-1/2 top-0 z-20 block -translate-x-1/2",
+            isHome ? "h-36 w-36 sm:h-52 sm:w-52 lg:h-72 lg:w-72" : "h-28 w-28 sm:h-36 sm:w-36 lg:h-44 lg:w-44"
+          )}
+        >
+          <div
+            className={cn(
+              "pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.18),transparent_70%)] blur-3xl opacity-85 transition duration-300 group-hover:opacity-100",
+              isHome ? "scale-[0.82]" : "scale-[0.92]"
+            )}
+          />
+          <KeyedVideoLogo
+            src="/assets/evuno-logo-rotate.mp4"
+            poster="/assets/logos/evuno-mark-hologram.png"
+            playbackRate={1.22}
+            className={cn(
+              "absolute left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen [filter:brightness(1.18)_contrast(1.32)_saturate(0.95)_drop-shadow(0_0_26px_rgba(255,255,255,0.14))]",
+              isHome ? "top-[42%] h-[113%] w-[113%]" : "top-[46%] h-[118%] w-[118%]"
+            )}
+          />
+        </Link>
+
+        <div className="relative z-30 flex items-center gap-3 sm:gap-5">
+          <nav className="flex items-center gap-3 sm:gap-5">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "text-[0.68rem] uppercase tracking-[0.28em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
+                  pathname === item.href && "text-mist"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button type="button" className={buttonStyles("secondary", "sm")} onClick={toggleCart}>
+            Cart {itemCount ? `(${itemCount})` : ""}
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}

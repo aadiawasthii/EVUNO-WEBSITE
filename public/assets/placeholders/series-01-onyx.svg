@@ -1,0 +1,16 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1200" fill="#050608"/>
+  <circle cx="600" cy="540" r="340" fill="url(#glow)" fill-opacity="0.9"/>
+  <path d="M451 318L533 274H667L749 318L834 430L756 488L736 866H464L444 488L366 430L451 318Z" fill="#07090D" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <path d="M533 274H667L640 348H560L533 274Z" fill="#101216"/>
+  <path d="M474 520H726" stroke="#9AA0AA" stroke-opacity="0.6" stroke-width="2"/>
+  <path d="M487 566H713" stroke="#9AA0AA" stroke-opacity="0.28" stroke-width="2"/>
+  <text x="600" y="968" fill="#E8ECEB" font-family="Avenir Next, Arial, sans-serif" font-size="42" letter-spacing="12" text-anchor="middle">SERIES 01</text>
+  <text x="600" y="1018" fill="#A0A6AF" font-family="Avenir Next, Arial, sans-serif" font-size="30" letter-spacing="8" text-anchor="middle">ONYX</text>
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 540) rotate(90) scale(340)">
+      <stop stop-color="#2A2E35" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#050608" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -1,0 +1,21 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1200" fill="#07090D"/>
+  <rect x="60" y="60" width="1080" height="1080" rx="42" fill="url(#panel)" stroke="#FFFFFF" stroke-opacity="0.12"/>
+  <rect x="150" y="150" width="900" height="900" rx="32" fill="#FFFFFF" fill-opacity="0.02" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <circle cx="600" cy="420" r="220" fill="url(#glow)" opacity="0.8"/>
+  <path d="M602 246L674 358L640 915L602 970L564 915L530 358L602 246Z" fill="#FFFFFF" fill-opacity="0.15" stroke="#FFFFFF" stroke-opacity="0.35"/>
+  <path d="M261 292L514 492L540 634L404 516L336 360L261 292Z" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <path d="M943 292L690 492L664 634L800 516L868 360L943 292Z" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <text x="156" y="962" fill="#F4F7FB" font-family="Arial, sans-serif" font-size="58" letter-spacing="10">EVUNO CORE TEE</text>
+  <text x="156" y="1028" fill="#8993A4" font-family="Arial, sans-serif" font-size="24" letter-spacing="7">UPLOAD /PUBLIC/MODELS/SHIRT-1.GLB FOR LIVE 3D</text>
+  <defs>
+    <linearGradient id="panel" x1="120" y1="100" x2="1020" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10141C"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 420) rotate(90) scale(260)">
+      <stop stop-color="#E6ECF7" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#E6ECF7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
