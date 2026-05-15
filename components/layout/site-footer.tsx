@@ -14,8 +14,8 @@ export function SiteFooter() {
           <Link href="/shop" className="hover:text-mist">
             Shop
           </Link>
-          <Link href="/brand" className="hover:text-mist">
-            Brand
+          <Link href="/about" className="hover:text-mist">
+            About
           </Link>
           <Link href="/admin/login" className="hover:text-mist">
             Admin

@@ -105,8 +105,8 @@ export function HomeExperience({ products }: HomeExperienceProps) {
               <Link href="/shop" className={`${buttonStyles("primary")} flex-1`}>
                 Shop Series 01
               </Link>
-              <Link href="/brand" className={`${buttonStyles("secondary")} flex-1`}>
-                Explore the Brand
+              <Link href="/about" className={`${buttonStyles("secondary")} flex-1`}>
+                About EVUNO
               </Link>
             </div>
           </div>

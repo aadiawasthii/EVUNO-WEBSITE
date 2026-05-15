@@ -66,8 +66,8 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             <Link href="/shop" className={buttonStyles("primary")}>
               Continue shopping
             </Link>
-            <Link href="/brand" className={buttonStyles("secondary")}>
-              Explore the brand
+            <Link href="/about" className={buttonStyles("secondary")}>
+              About EVUNO
             </Link>
           </div>
         </div>

@@ -8,11 +8,8 @@ import { buttonStyles } from "@/components/ui/button";
 import { KeyedVideoLogo } from "@/components/ui/keyed-video-logo";
 import { cn } from "@/lib/utils";
 
-const navigation = [
-  { href: "/shop", label: "Shop" },
-  { href: "/brand", label: "Brand" },
-  { href: "/series-01", label: "Series 01" }
-];
+const leftNavigation = [{ href: "/about", label: "About" }];
+const rightNavigation = [{ href: "/shop", label: "Shop" }];
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -21,7 +18,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 overflow-visible bg-abyss/70 backdrop-blur-xl">
-      <div className="shell relative flex min-h-[4.6rem] items-center justify-end gap-2 overflow-visible py-2 sm:min-h-24 sm:gap-5">
+      <div className="shell relative flex min-h-[4.6rem] items-center overflow-visible py-2 sm:min-h-24">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex items-center gap-2 sm:gap-5">
           <div className="h-px flex-1 bg-white/30" />
           <div className={cn(isHome ? "w-20 sm:w-40 lg:w-56" : "w-16 sm:w-32 lg:w-40")} />
@@ -53,14 +50,14 @@ export function SiteHeader() {
           />
         </Link>
 
-        <div className="relative z-30 flex items-center gap-2 pl-3 sm:gap-5">
+        <div className="relative z-30 flex w-full items-center justify-between gap-3">
           <nav className="flex items-center gap-2 sm:gap-5">
-            {navigation.map((item) => (
+            {leftNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-[0.58rem] uppercase tracking-[0.18em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
+                  "text-[0.6rem] uppercase tracking-[0.18em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
                   pathname === item.href && "text-mist"
                 )}
               >
@@ -69,13 +66,30 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <button
-            type="button"
-            className={cn(buttonStyles("secondary", "sm"), "px-3 text-[0.62rem] tracking-[0.18em] sm:px-4 sm:text-xs sm:tracking-[0.24em]")}
-            onClick={toggleCart}
-          >
-            Cart {itemCount ? `(${itemCount})` : ""}
-          </button>
+          <div className="flex items-center gap-2 pl-10 sm:gap-5 sm:pl-0">
+            <nav className="flex items-center gap-2 sm:gap-5">
+              {rightNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "text-[0.6rem] uppercase tracking-[0.18em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
+                    pathname === item.href && "text-mist"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <button
+              type="button"
+              className={cn(buttonStyles("secondary", "sm"), "px-3 text-[0.62rem] tracking-[0.18em] sm:px-4 sm:text-xs sm:tracking-[0.24em]")}
+              onClick={toggleCart}
+            >
+              Cart {itemCount ? `(${itemCount})` : ""}
+            </button>
+          </div>
         </div>
       </div>
     </header>
