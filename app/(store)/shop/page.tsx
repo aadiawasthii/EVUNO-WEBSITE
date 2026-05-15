@@ -10,12 +10,12 @@ export default async function ShopPage() {
   const products = await getStoreProducts();
 
   return (
-    <section className="shell pb-12 pt-10 sm:pb-16 sm:pt-12">
-      <div className="grid gap-6 border-t border-white/8 pt-6 sm:pt-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+    <section className="shell pb-10 pt-8 sm:pb-16 sm:pt-12">
+      <div className="grid gap-5 border-t border-white/8 pt-5 sm:pt-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
         <div className="max-w-2xl">
           <p className="eyebrow">Shop</p>
-          <h1 className="mt-4 text-4xl uppercase tracking-[0.14em] sm:text-5xl lg:text-6xl">Series 01</h1>
-          <p className="mt-3 text-sm uppercase tracking-[0.32em] text-steel sm:text-base">Apex performance tee</p>
+          <h1 className="mt-4 text-[2.7rem] uppercase tracking-[0.12em] sm:text-5xl sm:tracking-[0.14em] lg:text-6xl">Series 01</h1>
+          <p className="mt-3 text-xs uppercase tracking-[0.28em] text-steel sm:text-base sm:tracking-[0.32em]">Apex performance tee</p>
           <p className="mt-5 text-sm leading-8 text-steel sm:text-base">
             One EVUNO silhouette, three tuned colorways. Lightweight breathable fabric, seamless engineered texture,
             stretch recovery, and reflective detailing built to stay sharp in motion.
@@ -37,7 +37,7 @@ export default async function ShopPage() {
         <ColorwayShowcase products={products} />
       </div>
 
-      <div className="mt-10 grid gap-5 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-3">
         {products.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

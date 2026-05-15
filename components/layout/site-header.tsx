@@ -21,10 +21,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 overflow-visible bg-abyss/70 backdrop-blur-xl">
-      <div className="shell relative flex min-h-24 items-center justify-end gap-3 overflow-visible sm:gap-5">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex items-center gap-3 sm:gap-5">
+      <div className="shell relative flex min-h-[4.6rem] items-center justify-end gap-2 overflow-visible py-2 sm:min-h-24 sm:gap-5">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex items-center gap-2 sm:gap-5">
           <div className="h-px flex-1 bg-white/30" />
-          <div className={cn(isHome ? "w-28 sm:w-40 lg:w-56" : "w-24 sm:w-32 lg:w-40")} />
+          <div className={cn(isHome ? "w-20 sm:w-40 lg:w-56" : "w-16 sm:w-32 lg:w-40")} />
           <div className="h-px flex-1 bg-white/30" />
         </div>
 
@@ -33,7 +33,7 @@ export function SiteHeader() {
           aria-label="Go to homepage"
           className={cn(
             "group absolute left-1/2 top-0 z-20 block -translate-x-1/2",
-            isHome ? "h-36 w-36 sm:h-52 sm:w-52 lg:h-72 lg:w-72" : "h-28 w-28 sm:h-36 sm:w-36 lg:h-44 lg:w-44"
+            isHome ? "h-24 w-24 sm:h-52 sm:w-52 lg:h-72 lg:w-72" : "h-20 w-20 sm:h-36 sm:w-36 lg:h-44 lg:w-44"
           )}
         >
           <div
@@ -48,19 +48,19 @@ export function SiteHeader() {
             playbackRate={1.22}
             className={cn(
               "absolute left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen [filter:brightness(1.18)_contrast(1.32)_saturate(0.95)_drop-shadow(0_0_26px_rgba(255,255,255,0.14))]",
-              isHome ? "top-[42%] h-[113%] w-[113%]" : "top-[46%] h-[118%] w-[118%]"
+              isHome ? "top-[42%] h-[110%] w-[110%] sm:h-[113%] sm:w-[113%]" : "top-[46%] h-[112%] w-[112%] sm:h-[118%] sm:w-[118%]"
             )}
           />
         </Link>
 
-        <div className="relative z-30 flex items-center gap-3 sm:gap-5">
-          <nav className="flex items-center gap-3 sm:gap-5">
+        <div className="relative z-30 flex items-center gap-2 pl-3 sm:gap-5">
+          <nav className="flex items-center gap-2 sm:gap-5">
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-[0.68rem] uppercase tracking-[0.28em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
+                  "text-[0.58rem] uppercase tracking-[0.18em] text-steel transition hover:text-mist sm:text-sm sm:tracking-[0.24em]",
                   pathname === item.href && "text-mist"
                 )}
               >
@@ -69,7 +69,11 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <button type="button" className={buttonStyles("secondary", "sm")} onClick={toggleCart}>
+          <button
+            type="button"
+            className={cn(buttonStyles("secondary", "sm"), "px-3 text-[0.62rem] tracking-[0.18em] sm:px-4 sm:text-xs sm:tracking-[0.24em]")}
+            onClick={toggleCart}
+          >
             Cart {itemCount ? `(${itemCount})` : ""}
           </button>
         </div>

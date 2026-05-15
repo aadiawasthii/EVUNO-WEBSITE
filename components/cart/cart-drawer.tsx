@@ -41,7 +41,7 @@ export function CartDrawer() {
             onClick={closeCart}
           />
           <motion.aside
-            className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l border-white/10 bg-[#07090d]/95 p-6 shadow-[0_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl"
+            className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l border-white/10 bg-[#07090d]/95 p-4 shadow-[0_0_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl sm:p-6"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -58,7 +58,7 @@ export function CartDrawer() {
               </button>
             </div>
 
-            <div className="mt-8 flex-1 space-y-4 overflow-y-auto pr-1">
+            <div className="mt-6 flex-1 space-y-4 overflow-y-auto pr-1 sm:mt-8">
               {items.length ? null : (
                 <div className="glass-panel p-5 text-sm text-steel">
                   Your cart is empty. Build Series 01 around the Forest, Onyx, or Cobalt colorway that fits your next evolution.

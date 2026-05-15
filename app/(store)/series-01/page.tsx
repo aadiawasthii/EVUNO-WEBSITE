@@ -20,11 +20,11 @@ export default async function SeriesZeroOnePage() {
   }));
 
   return (
-    <section className="shell py-14 sm:py-20">
-      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="section-frame p-8 sm:p-10 lg:p-12">
+    <section className="shell py-10 sm:py-20">
+      <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="section-frame p-6 sm:p-10 lg:p-12">
           <p className="eyebrow">Series 01</p>
-          <h1 className="mt-5 max-w-4xl text-4xl uppercase tracking-[0.14em] sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 max-w-4xl text-[2.6rem] uppercase tracking-[0.11em] sm:text-5xl sm:tracking-[0.14em] lg:text-6xl">
             Apex Performance Tee. One engineered model. Three exact colorways.
           </h1>
           <p className="mt-6 max-w-2xl text-sm leading-8 text-steel sm:text-base">
@@ -40,8 +40,8 @@ export default async function SeriesZeroOnePage() {
           </div>
         </div>
 
-        <div className="section-frame p-8 sm:p-10 lg:p-12">
-          <div className="space-y-6">
+        <div className="section-frame p-6 sm:p-10 lg:p-12">
+          <div className="space-y-5 sm:space-y-6">
             {products.map((product) => (
               <div key={product.slug} className="border-l border-white/10 pl-5">
                 <p className="eyebrow">{product.color}</p>

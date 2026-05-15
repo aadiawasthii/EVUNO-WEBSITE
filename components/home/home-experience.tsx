@@ -34,8 +34,8 @@ export function HomeExperience({ products }: HomeExperienceProps) {
   });
 
   return (
-    <div className="pb-20">
-      <section ref={heroRef} className="shell relative overflow-hidden pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pt-36">
+    <div className="pb-14 sm:pb-20">
+      <section ref={heroRef} className="shell relative overflow-hidden pb-12 pt-[4.5rem] sm:pb-20 sm:pt-28 lg:pt-36">
         <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 overflow-hidden">
           <motion.div
             className="absolute inset-0 bg-knit-luxury opacity-[0.96]"
@@ -81,27 +81,27 @@ export function HomeExperience({ products }: HomeExperienceProps) {
         </div>
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle,rgba(255,255,255,0.12),transparent_62%)] blur-3xl" />
         <motion.div
-          className="relative mx-auto flex min-h-[calc(100vh-7rem)] max-w-6xl flex-col items-center justify-center px-4 text-center"
+          className="relative mx-auto flex min-h-[calc(100vh-6rem)] max-w-6xl flex-col items-center justify-center px-1 text-center sm:px-4"
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 28 }}
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="relative z-10 -mt-12 flex w-full flex-col items-center sm:-mt-14 lg:-mt-16">
+          <div className="relative z-10 -mt-5 flex w-full flex-col items-center sm:-mt-14 lg:-mt-16">
             <MetallicWordmark
               progress={scrollYProgress}
               reduceMotion={shouldReduceMotion}
-              className="relative w-[min(82vw,54rem)]"
+              className="relative w-[min(92vw,54rem)] sm:w-[min(82vw,54rem)]"
             />
           </div>
 
-          <div className="relative z-10 -mt-12 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
+          <div className="relative z-10 -mt-8 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
             <p className="eyebrow">Custom-Engineered Athleisure</p>
-            <h1 className="headline-balance mt-6 max-w-4xl text-5xl font-semibold uppercase tracking-[0.14em] sm:text-6xl lg:text-7xl">
+            <h1 className="headline-balance mt-5 max-w-4xl text-[2.85rem] font-semibold uppercase tracking-[0.12em] sm:mt-6 sm:text-6xl sm:tracking-[0.14em] lg:text-7xl">
               EVOLVE YOURSELF
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-steel sm:text-lg">Drop 001 is here. Built to move with you.</p>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-steel">Minimal form. Maximum intent. Made to evolve.</p>
-            <div className="mt-10 flex w-full max-w-md flex-col gap-4 sm:flex-row sm:justify-center">
+            <p className="mt-5 max-w-xl px-4 text-[0.95rem] leading-7 text-steel sm:mt-6 sm:max-w-2xl sm:px-0 sm:text-lg">Drop 001 is here. Built to move with you.</p>
+            <p className="mt-4 max-w-lg px-5 text-sm leading-7 text-steel sm:mt-5 sm:max-w-xl sm:px-0">Minimal form. Maximum intent. Made to evolve.</p>
+            <div className="mt-8 flex w-full max-w-md flex-col gap-3 px-4 sm:mt-10 sm:flex-row sm:justify-center sm:px-0">
               <Link href="/shop" className={`${buttonStyles("primary")} flex-1`}>
                 Shop Series 01
               </Link>
@@ -113,7 +113,7 @@ export function HomeExperience({ products }: HomeExperienceProps) {
         </motion.div>
       </section>
 
-      <section className="shell relative overflow-hidden py-10 sm:py-14">
+      <section className="shell relative overflow-hidden py-8 sm:py-14">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <Image
             src="/assets/landing-runner-bg.png"
@@ -125,7 +125,7 @@ export function HomeExperience({ products }: HomeExperienceProps) {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,6,8,0.97)_0%,rgba(5,6,8,0.9)_28%,rgba(5,6,8,0.54)_56%,rgba(5,6,8,0.86)_100%),linear-gradient(180deg,rgba(5,6,8,0.26)_0%,rgba(5,6,8,0.8)_100%)]" />
         </div>
         <div className="relative">
-          <div className="grid gap-10 border-y border-white/8 py-10 sm:py-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-8 border-y border-white/8 py-8 sm:py-14 lg:grid-cols-[0.9fr_1.1fr]">
             <motion.div
               initial={shouldReduceMotion ? undefined : { opacity: 0, y: 32 }}
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -133,13 +133,13 @@ export function HomeExperience({ products }: HomeExperienceProps) {
               transition={{ duration: 0.65, ease: "easeOut" }}
             >
               <p className="eyebrow">Manifesto</p>
-              <h2 className="mt-5 text-3xl uppercase tracking-[0.14em] sm:text-4xl">Future identity starts with repetition</h2>
+              <h2 className="mt-4 text-[2.1rem] uppercase tracking-[0.12em] sm:mt-5 sm:text-4xl sm:tracking-[0.14em]">Future identity starts with repetition</h2>
             </motion.div>
             <div className="space-y-6">
               {manifestoPoints.map((point, index) => (
                 <motion.p
                   key={point}
-                  className="border-l border-white/10 pl-5 text-sm leading-7 text-steel sm:text-base"
+                  className="border-l border-white/10 pl-4 text-sm leading-7 text-steel sm:pl-5 sm:text-base"
                   initial={shouldReduceMotion ? undefined : { opacity: 0, y: 28 }}
                   whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={revealViewport}
@@ -152,7 +152,7 @@ export function HomeExperience({ products }: HomeExperienceProps) {
           </div>
 
           <motion.div
-            className="mt-10 mb-10 flex flex-col gap-4 border-t border-white/8 pt-10 sm:mt-14 sm:mb-10 sm:pt-14 md:flex-row md:items-end md:justify-between"
+            className="mb-8 mt-8 flex flex-col gap-4 border-t border-white/8 pt-8 sm:mb-10 sm:mt-14 sm:pt-14 md:flex-row md:items-end md:justify-between"
             initial={shouldReduceMotion ? undefined : { opacity: 0, y: 32 }}
             whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={revealViewport}
@@ -160,9 +160,9 @@ export function HomeExperience({ products }: HomeExperienceProps) {
           >
             <div>
               <p className="eyebrow">Series 01</p>
-              <h2 className="mt-4 text-3xl uppercase tracking-[0.14em] sm:text-4xl">One silhouette. Three color systems.</h2>
+              <h2 className="mt-4 text-[2.1rem] uppercase tracking-[0.12em] sm:text-4xl sm:tracking-[0.14em]">One silhouette. Three color systems.</h2>
             </div>
-            <p className="max-w-xl text-sm leading-7 text-steel">
+            <p className="max-w-xl text-sm leading-7 text-steel md:text-right">
               One performance-engineered tee, separated into Forest, Onyx, and Cobalt so the drop still reads as a curated three-piece system.
             </p>
           </motion.div>

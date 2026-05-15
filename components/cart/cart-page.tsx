@@ -12,10 +12,10 @@ export function CartPage() {
 
   if (!items.length) {
     return (
-      <section className="shell py-24">
+      <section className="shell py-16 sm:py-24">
         <div className="mx-auto max-w-2xl glass-panel p-10 text-center">
           <p className="eyebrow">Cart</p>
-          <h1 className="mt-4 text-4xl uppercase tracking-[0.14em]">No pieces selected yet</h1>
+          <h1 className="mt-4 text-[2.5rem] uppercase tracking-[0.12em] sm:text-4xl sm:tracking-[0.14em]">No pieces selected yet</h1>
           <p className="mt-4 text-sm leading-7 text-steel">
             Series 01 is ready when you are. Start with the Forest, Onyx, or Cobalt colorway that feels most like your next form.
           </p>
@@ -28,12 +28,12 @@ export function CartPage() {
   }
 
   return (
-    <section className="shell py-16 sm:py-20">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.8fr)]">
+    <section className="shell py-10 sm:py-20">
+      <div className="grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(340px,0.8fr)]">
         <div className="space-y-4">
           <div>
             <p className="eyebrow">Cart</p>
-            <h1 className="mt-4 text-4xl uppercase tracking-[0.14em]">Refine your selection</h1>
+            <h1 className="mt-4 text-[2.4rem] uppercase tracking-[0.12em] sm:text-4xl sm:tracking-[0.14em]">Refine your selection</h1>
           </div>
 
           {items.map((item) => (
@@ -44,7 +44,7 @@ export function CartPage() {
                   <h2 className="mt-2 text-xl font-medium">{item.productName}</h2>
                   <p className="mt-3 text-steel">{formatPrice(item.unitPriceCents)}</p>
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <button
                     type="button"
                     className={buttonStyles("secondary", "sm")}
@@ -73,7 +73,7 @@ export function CartPage() {
           ))}
         </div>
 
-        <aside className="glass-panel h-fit p-6">
+        <aside className="glass-panel h-fit p-5 sm:p-6">
           <p className="eyebrow">Summary</p>
           <div className="mt-6 flex items-center justify-between text-sm uppercase tracking-[0.18em] text-steel">
             <span>Subtotal</span>

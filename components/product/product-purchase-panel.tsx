@@ -78,7 +78,7 @@ export function ProductPurchasePanel({ product, compact = false }: ProductPurcha
         </select>
       </label>
 
-      <div className="flex items-end gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <label className={cn("block", compact ? "max-w-[110px]" : "max-w-[132px]")}>
           <span className="text-xs uppercase tracking-[0.24em] text-steel">Quantity</span>
           <input
@@ -92,7 +92,7 @@ export function ProductPurchasePanel({ product, compact = false }: ProductPurcha
         </label>
         <button
           type="button"
-          className={cn(buttonStyles("primary"), "flex-1")}
+          className={cn(buttonStyles("primary"), "w-full flex-1")}
           disabled={isSoldOut}
           onClick={handleAddToCart}
         >

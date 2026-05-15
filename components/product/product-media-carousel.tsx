@@ -158,7 +158,7 @@ export function ProductMediaCarousel({
 
   return (
     <section className="space-y-3">
-      <div className="grid gap-2.5 sm:grid-cols-3">
+      <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
         {navigationSlides.map((slide) => {
           const slideIndex = slides.findIndex((candidate) => candidate.id === slide.id);
           const view =
@@ -177,11 +177,11 @@ export function ProductMediaCarousel({
               onClick={() => setIndex(slideIndex)}
               aria-pressed={index === slideIndex}
               className={cn(
-                "glass-panel overflow-hidden p-2.5 text-left transition hover:border-white/18",
+                "glass-panel overflow-hidden p-2 text-left transition hover:border-white/18 sm:p-2.5",
                 index === slideIndex && "border-white/28 bg-white/[0.1] shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset]"
               )}
             >
-              <div className="relative aspect-[5/4] overflow-hidden rounded-[20px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]">
+              <div className="relative aspect-[5/4] overflow-hidden rounded-[16px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] sm:rounded-[20px]">
                 {slide.kind === "fabric" ? (
                   <Image src={fabricDetailUrl} alt={`${name} fabric detail`} fill sizes="(max-width: 768px) 25vw, 10vw" className="object-cover" />
                 ) : (
@@ -195,7 +195,7 @@ export function ProductMediaCarousel({
                   />
                 )}
               </div>
-              <p className={cn("mt-2.5 text-[0.68rem] uppercase tracking-[0.24em] text-steel", index === slideIndex && "text-mist")}>
+              <p className={cn("mt-2 text-[0.58rem] uppercase tracking-[0.16em] text-steel sm:mt-2.5 sm:text-[0.68rem] sm:tracking-[0.24em]", index === slideIndex && "text-mist")}>
                 {slide.label}
               </p>
             </button>
@@ -203,7 +203,7 @@ export function ProductMediaCarousel({
         })}
       </div>
 
-      <div className="section-frame p-3 sm:p-4">
+      <div className="section-frame p-2.5 sm:p-4">
         <div className="relative overflow-hidden rounded-[28px]">
           {activeSlide.kind === "motion" ? (
             <ProductModelViewer
@@ -227,7 +227,7 @@ export function ProductMediaCarousel({
             />
           )}
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3 sm:p-4">
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-2.5 sm:p-4">
             <div className="rounded-full border border-white/10 bg-black/35 px-3 py-2 text-[0.68rem] uppercase tracking-[0.24em] text-mist backdrop-blur-xl">
               {activeSlide.label}
             </div>
@@ -237,7 +237,7 @@ export function ProductMediaCarousel({
             type="button"
             aria-label="Previous product image"
             onClick={() => goTo(index - 1)}
-            className="absolute left-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-black/42 text-mist backdrop-blur-xl transition hover:border-white/24 hover:bg-black/55 sm:left-4 sm:h-12 sm:w-12"
+            className="absolute left-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-black/42 text-mist backdrop-blur-xl transition hover:border-white/24 hover:bg-black/55 sm:left-4 sm:h-12 sm:w-12"
           >
             <Arrow direction="left" />
           </button>
@@ -245,7 +245,7 @@ export function ProductMediaCarousel({
             type="button"
             aria-label="Next product image"
             onClick={() => goTo(index + 1)}
-            className="absolute right-3 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-black/42 text-mist backdrop-blur-xl transition hover:border-white/24 hover:bg-black/55 sm:right-4 sm:h-12 sm:w-12"
+            className="absolute right-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-black/42 text-mist backdrop-blur-xl transition hover:border-white/24 hover:bg-black/55 sm:right-4 sm:h-12 sm:w-12"
           >
             <Arrow direction="right" />
           </button>
@@ -267,9 +267,9 @@ export function ProductMediaCarousel({
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.28, ease: "easeOut" }}
         >
-          <article className="glass-panel p-6 sm:p-7">
+          <article className="glass-panel p-5 sm:p-7">
             <p className="eyebrow">{activeDetails.eyebrow}</p>
-            <h2 className="mt-4 text-3xl uppercase tracking-[0.14em] sm:text-4xl">{activeDetails.title}</h2>
+            <h2 className="mt-4 text-[2rem] uppercase tracking-[0.11em] sm:text-4xl sm:tracking-[0.14em]">{activeDetails.title}</h2>
             <p className="mt-5 text-sm leading-7 text-steel sm:text-base">{activeDetails.body}</p>
           </article>
           <div className="grid gap-4">
@@ -283,52 +283,6 @@ export function ProductMediaCarousel({
         </motion.div>
       </AnimatePresence>
     </section>
-  );
-}
-
-function MotionThumbnail({
-  alt,
-  videoUrl,
-  posterUrl,
-  videoScale = 1,
-  videoPlaybackRate = 1.12
-}: {
-  alt: string;
-  videoUrl?: string;
-  posterUrl: string;
-  videoScale?: number;
-  videoPlaybackRate?: number;
-}) {
-  if (!videoUrl) {
-    return (
-      <GarmentStill
-        src={posterUrl}
-        alt={alt}
-        view="front"
-        sizes="(max-width: 768px) 25vw, 10vw"
-        className="h-full w-full"
-        paddingClassName="p-4"
-      />
-    );
-  }
-
-  return (
-    <div className="relative h-full w-full overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_65%)]" />
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        poster={posterUrl}
-        aria-label={alt}
-        style={{ transform: `scale(${videoScale})`, transformOrigin: "center center" }}
-      >
-        <source src={videoUrl} type="video/webm" />
-      </video>
-    </div>
   );
 }
 
