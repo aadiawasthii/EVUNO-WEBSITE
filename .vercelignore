@@ -1,0 +1,14 @@
+node_modules
+.next
+.next-*
+.env
+.env.local
+.env.*
+data
+docs
+docs-*
+results
+index_files
+index.qmd
+src
+tsconfig.tsbuildinfo
