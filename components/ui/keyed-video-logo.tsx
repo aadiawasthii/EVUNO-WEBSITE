@@ -6,6 +6,10 @@ import { cn } from "@/lib/utils";
 
 type VideoFrameCallback = (now: number, metadata: { mediaTime: number; presentedFrames: number }) => void;
 
+const DIRECT_LOOP_CROSSFADE_MS = 180;
+const DIRECT_LOOP_START_OFFSET_SECONDS = 0.016;
+const DIRECT_LOOP_END_BUFFER_SECONDS = 0.04;
+
 type KeyedVideoLogoProps = {
   src: string;
   poster?: string;
@@ -252,18 +256,7 @@ export function KeyedVideoLogo({
 
   if (preferDirectVideo) {
     return (
-      <div className={cn("relative", className)}>
-        <video
-          className="h-full w-full object-contain mix-blend-screen [filter:brightness(1.16)_contrast(1.22)_saturate(0.96)_drop-shadow(0_0_20px_rgba(255,255,255,0.14))]"
-          src={src}
-          poster={poster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        />
-      </div>
+      <SmoothDirectVideoLogo src={src} poster={poster} className={className} />
     );
   }
 
@@ -281,6 +274,164 @@ export function KeyedVideoLogo({
         preload="auto"
       />
       <canvas ref={canvasRef} className="h-full w-full object-contain" aria-hidden="true" />
+    </div>
+  );
+}
+
+function SmoothDirectVideoLogo({
+  src,
+  poster,
+  className
+}: {
+  src: string;
+  poster?: string;
+  className?: string;
+}) {
+  const primaryVideoRef = useRef<HTMLVideoElement | null>(null);
+  const secondaryVideoRef = useRef<HTMLVideoElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const crossfadeTimeoutRef = useRef<number | null>(null);
+  const activeIndexRef = useRef<0 | 1>(0);
+  const isCrossfadingRef = useRef(false);
+  const [visibleIndex, setVisibleIndex] = useState<0 | 1>(0);
+
+  useEffect(() => {
+    const firstVideo = primaryVideoRef.current;
+    const secondVideo = secondaryVideoRef.current;
+
+    if (!firstVideo || !secondVideo) {
+      return;
+    }
+
+    const videos: [HTMLVideoElement, HTMLVideoElement] = [firstVideo, secondVideo];
+    let started = false;
+    let disposed = false;
+
+    const hasUsableDuration = (video: HTMLVideoElement) => Number.isFinite(video.duration) && video.duration > 0;
+
+    const pauseAndReset = (video: HTMLVideoElement) => {
+      video.pause();
+      try {
+        video.currentTime = 0;
+      } catch {}
+    };
+
+    const primeVideo = async (video: HTMLVideoElement) => {
+      try {
+        video.currentTime = DIRECT_LOOP_START_OFFSET_SECONDS;
+      } catch {}
+
+      try {
+        await video.play();
+      } catch {}
+    };
+
+    const clearLoopHandles = () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+
+      if (crossfadeTimeoutRef.current !== null) {
+        window.clearTimeout(crossfadeTimeoutRef.current);
+        crossfadeTimeoutRef.current = null;
+      }
+    };
+
+    const startLoop = () => {
+      if (started || disposed || !videos.every(hasUsableDuration)) {
+        return;
+      }
+
+      started = true;
+      setVisibleIndex(0);
+      activeIndexRef.current = 0;
+      isCrossfadingRef.current = false;
+
+      for (const video of videos) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+      }
+
+      pauseAndReset(firstVideo);
+      pauseAndReset(secondVideo);
+      void primeVideo(firstVideo);
+
+      const tick = () => {
+        const activeVideo = videos[activeIndexRef.current];
+
+        if (!activeVideo || !hasUsableDuration(activeVideo) || isCrossfadingRef.current) {
+          animationFrameRef.current = requestAnimationFrame(tick);
+          return;
+        }
+
+        const crossfadeStartTime =
+          activeVideo.duration - DIRECT_LOOP_END_BUFFER_SECONDS - DIRECT_LOOP_CROSSFADE_MS / 1000;
+
+        if (activeVideo.currentTime >= crossfadeStartTime) {
+          const standbyIndex = activeIndexRef.current === 0 ? 1 : 0;
+          const standbyVideo = videos[standbyIndex];
+
+          if (standbyVideo) {
+            isCrossfadingRef.current = true;
+            void primeVideo(standbyVideo);
+            setVisibleIndex(standbyIndex);
+
+            crossfadeTimeoutRef.current = window.setTimeout(() => {
+              pauseAndReset(activeVideo);
+              activeIndexRef.current = standbyIndex;
+              isCrossfadingRef.current = false;
+            }, DIRECT_LOOP_CROSSFADE_MS);
+          }
+        }
+
+        animationFrameRef.current = requestAnimationFrame(tick);
+      };
+
+      animationFrameRef.current = requestAnimationFrame(tick);
+    };
+
+    const handleReady = () => {
+      startLoop();
+    };
+
+    for (const video of videos) {
+      video.addEventListener("loadedmetadata", handleReady);
+      video.addEventListener("canplay", handleReady);
+    }
+
+    startLoop();
+
+    return () => {
+      disposed = true;
+      clearLoopHandles();
+      for (const video of videos) {
+        video.removeEventListener("loadedmetadata", handleReady);
+        video.removeEventListener("canplay", handleReady);
+      }
+      pauseAndReset(firstVideo);
+      pauseAndReset(secondVideo);
+    };
+  }, [src]);
+
+  return (
+    <div className={cn("relative", className)}>
+      {[primaryVideoRef, secondaryVideoRef].map((videoRef, index) => (
+        <video
+          key={`${src}-${index}`}
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-contain mix-blend-screen transition-opacity duration-200 will-change-[opacity,transform] [filter:brightness(1.16)_contrast(1.22)_saturate(0.96)_drop-shadow(0_0_20px_rgba(255,255,255,0.14))]"
+          src={src}
+          poster={poster}
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          aria-hidden={visibleIndex !== index}
+          style={{ opacity: visibleIndex === index ? 1 : 0 }}
+        />
+      ))}
     </div>
   );
 }
