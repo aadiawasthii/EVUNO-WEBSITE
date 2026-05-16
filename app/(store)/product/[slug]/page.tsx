@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { ProductAccordion } from "@/components/product/product-accordion";
 import { ProductFeatureChips } from "@/components/product/product-feature-chips";
 import { ProductMediaCarousel } from "@/components/product/product-media-carousel";
 import { ProductPurchasePanel } from "@/components/product/product-purchase-panel";
-import { getSeries01RunnerByColor, series01Editorial } from "@/lib/catalog";
+import { series01Editorial } from "@/lib/catalog";
 import { getStoreProductBySlug } from "@/lib/storefront";
 
 type ProductPageProps = {
@@ -38,24 +37,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const runnerEditorialUrl = getSeries01RunnerByColor(product.color);
-
   return (
     <section className="shell pb-10 pt-6 sm:pb-16 sm:pt-10">
-      <article className="section-frame relative mb-5 overflow-hidden">
-        <div className="relative aspect-[8/9] min-h-[260px] sm:aspect-[16/7] sm:min-h-[280px] lg:min-h-[340px]">
-          <Image
-            src={runnerEditorialUrl}
-            alt={`${product.color} Series 01 runner editorial`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[76%_center] sm:object-[76%_center]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,6,8,0.92)_0%,rgba(5,6,8,0.82)_28%,rgba(5,6,8,0.34)_58%,rgba(5,6,8,0.76)_100%),linear-gradient(180deg,rgba(5,6,8,0.18)_0%,rgba(5,6,8,0.5)_100%)]" />
-        </div>
-      </article>
-
       <div className="grid gap-5 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
         <div className="space-y-4">
           <ProductMediaCarousel
