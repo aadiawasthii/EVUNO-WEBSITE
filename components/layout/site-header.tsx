@@ -21,7 +21,7 @@ export function SiteHeader() {
       <div className="shell relative flex min-h-[4.6rem] items-center overflow-visible py-2 sm:min-h-24">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex items-center gap-2 sm:gap-5">
           <div className="h-px flex-1 bg-white/30" />
-          <div className={cn(isHome ? "w-24 sm:w-40 lg:w-56" : "w-20 sm:w-32 lg:w-40")} />
+          <div className={cn(isHome ? "w-28 sm:w-40 lg:w-56" : "w-24 sm:w-32 lg:w-40")} />
           <div className="h-px flex-1 bg-white/30" />
         </div>
 
@@ -30,7 +30,7 @@ export function SiteHeader() {
           aria-label="Go to homepage"
           className={cn(
             "group absolute left-1/2 top-0 z-20 block -translate-x-1/2",
-            isHome ? "h-28 w-28 sm:h-52 sm:w-52 lg:h-72 lg:w-72" : "h-24 w-24 sm:h-36 sm:w-36 lg:h-44 lg:w-44"
+            isHome ? "h-32 w-32 sm:h-52 sm:w-52 lg:h-72 lg:w-72" : "h-28 w-28 sm:h-36 sm:w-36 lg:h-44 lg:w-44"
           )}
         >
           <div
@@ -40,12 +40,12 @@ export function SiteHeader() {
             )}
           />
           <KeyedVideoLogo
-            src="/assets/evuno-logo-rotate.mp4"
+            src="/assets/evuno-logo-rotate-alt.mp4"
             poster="/assets/logos/evuno-mark-hologram.png"
             playbackRate={1.22}
             className={cn(
               "absolute left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen [filter:brightness(1.18)_contrast(1.32)_saturate(0.95)_drop-shadow(0_0_26px_rgba(255,255,255,0.14))]",
-              isHome ? "top-[42%] h-[120%] w-[120%] sm:h-[113%] sm:w-[113%]" : "top-[44%] h-[122%] w-[122%] sm:h-[118%] sm:w-[118%]"
+              isHome ? "top-[42%] h-[128%] w-[128%] sm:h-[113%] sm:w-[113%]" : "top-[44%] h-[128%] w-[128%] sm:h-[118%] sm:w-[118%]"
             )}
           />
         </Link>

@@ -55,6 +55,7 @@ export function ColorwayShowcase({ products }: ColorwayShowcaseProps) {
             alt={`${onyx.name} reflective spine editorial`}
             fill
             priority
+            unoptimized
             sizes="(max-width: 1024px) 100vw, 48vw"
             className="object-cover object-center"
           />

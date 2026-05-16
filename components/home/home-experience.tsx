@@ -105,8 +105,8 @@ export function HomeExperience({ products }: HomeExperienceProps) {
             />
           </div>
 
-          <div className="relative z-10 -mt-6 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
-            <p className="eyebrow mt-4 sm:mt-0">Custom-Engineered Athleisure</p>
+          <div className="relative z-10 -mt-4 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
+            <p className="eyebrow mt-6 sm:mt-0">Custom-Engineered Athleisure</p>
             <h1 className="headline-balance mt-5 max-w-4xl text-[2.85rem] font-semibold uppercase tracking-[0.12em] sm:mt-6 sm:text-6xl sm:tracking-[0.14em] lg:text-7xl">
               EVOLVE YOURSELF
             </h1>

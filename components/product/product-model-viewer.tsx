@@ -48,6 +48,7 @@ export function ProductModelViewer({
   const reduceMotion = useReducedMotion();
   const [preferLightweightVideo, setPreferLightweightVideo] = useState(false);
   const [hasError, setHasError] = useState(!hasModel);
+  const shouldUseNativeLoop = preferLightweightVideo || Boolean(reduceMotion);
 
   useEffect(() => {
     void import("@google/model-viewer");
@@ -67,9 +68,7 @@ export function ProductModelViewer({
       <div className={cn("relative overflow-hidden rounded-[26px] border border-white/10 bg-metal-sheen", className)}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_58%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_20%,rgba(255,255,255,0.05)_48%,transparent_72%)] opacity-70 mix-blend-screen" />
-        {reduceMotion ? (
-          <Image src={fallbackImage} alt={alt} fill className="object-contain p-6" sizes="(max-width: 768px) 100vw, 40vw" />
-        ) : preferLightweightVideo ? (
+        {shouldUseNativeLoop ? (
           <NativeLoopVideo
             alt={alt}
             fallbackImage={fallbackImage}
@@ -355,8 +354,8 @@ function NativeLoopVideo({
           transform: `scale(${videoScale})`
         }}
       >
-        <source src={videoUrl} type="video/webm" />
         {videoMp4Url ? <source src={videoMp4Url} type="video/mp4" /> : null}
+        <source src={videoUrl} type="video/webm" />
       </video>
     </div>
   );
