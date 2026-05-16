@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 
@@ -28,10 +28,21 @@ export function HomeExperience({ products }: HomeExperienceProps) {
   const shouldReduceMotion = reduceMotion ?? false;
   const revealViewport = { once: true, amount: 0.2 };
   const heroRef = useRef<HTMLElement | null>(null);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
+  const shouldAnimateAmbient = !shouldReduceMotion && !isMobileViewport;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setIsMobileViewport(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
 
   return (
     <div className="pb-14 sm:pb-20">
@@ -40,41 +51,41 @@ export function HomeExperience({ products }: HomeExperienceProps) {
           <motion.div
             className="absolute inset-0 bg-knit-luxury opacity-[0.96]"
             animate={
-              shouldReduceMotion
-                ? undefined
-                : {
+              shouldAnimateAmbient
+                ? {
                     scale: [1, 1.02, 1],
                     x: [0, -10, 8, 0]
                   }
+                : undefined
             }
             transition={
-              shouldReduceMotion
-                ? undefined
-                : {
+              shouldAnimateAmbient
+                ? {
                     duration: 18,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }
+                : undefined
             }
           />
           <motion.div
             className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(255,255,255,0.12),transparent_18%),radial-gradient(circle_at_20%_44%,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,rgba(5,6,8,0.74)_0%,rgba(5,6,8,0.38)_26%,rgba(5,6,8,0.56)_54%,rgba(5,6,8,0.9)_100%)]"
             animate={
-              shouldReduceMotion
-                ? undefined
-                : {
+              shouldAnimateAmbient
+                ? {
                     opacity: [0.9, 1, 0.92],
                     x: [0, 12, 0]
                   }
+                : undefined
             }
             transition={
-              shouldReduceMotion
-                ? undefined
-                : {
+              shouldAnimateAmbient
+                ? {
                     duration: 14,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }
+                : undefined
             }
           />
           <div className="absolute inset-y-0 left-0 w-[52%] bg-[linear-gradient(90deg,rgba(5,6,8,0.94)_0%,rgba(5,6,8,0.72)_42%,rgba(5,6,8,0)_100%)]" />
@@ -94,8 +105,8 @@ export function HomeExperience({ products }: HomeExperienceProps) {
             />
           </div>
 
-          <div className="relative z-10 -mt-8 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
-            <p className="eyebrow">Custom-Engineered Athleisure</p>
+          <div className="relative z-10 -mt-6 flex w-full max-w-3xl flex-col items-center sm:-mt-14">
+            <p className="eyebrow mt-4 sm:mt-0">Custom-Engineered Athleisure</p>
             <h1 className="headline-balance mt-5 max-w-4xl text-[2.85rem] font-semibold uppercase tracking-[0.12em] sm:mt-6 sm:text-6xl sm:tracking-[0.14em] lg:text-7xl">
               EVOLVE YOURSELF
             </h1>
@@ -183,6 +194,7 @@ export function HomeExperience({ products }: HomeExperienceProps) {
                   hasModel={product.hasModel}
                   modelUrl={product.modelUrl}
                   videoUrl={product.videoUrl}
+                  videoMp4Url={product.videoMp4Url}
                   videoScale={product.videoScale}
                   videoPlaybackRate={product.videoPlaybackRate}
                   className="aspect-square border-white/5 bg-black"

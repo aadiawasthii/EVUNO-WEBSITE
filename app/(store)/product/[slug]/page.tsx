@@ -4,7 +4,6 @@ import { ProductAccordion } from "@/components/product/product-accordion";
 import { ProductFeatureChips } from "@/components/product/product-feature-chips";
 import { ProductMediaCarousel } from "@/components/product/product-media-carousel";
 import { ProductPurchasePanel } from "@/components/product/product-purchase-panel";
-import { series01Editorial } from "@/lib/catalog";
 import { getStoreProductBySlug } from "@/lib/storefront";
 
 type ProductPageProps = {
@@ -48,11 +47,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
             hasModel={product.hasModel}
             modelUrl={product.modelUrl}
             videoUrl={product.videoUrl}
+            videoMp4Url={product.videoMp4Url}
             videoScale={product.videoScale}
             videoPlaybackRate={product.videoPlaybackRate}
             frontStillUrl={product.frontStillUrl}
             backStillUrl={product.backStillUrl}
-            fabricDetailUrl={series01Editorial.fabricDetailUrl}
+            fabricDetailUrl={product.fabricDetailUrl}
             material={product.material}
             fitLabel={product.fitLabel}
             manufacturingNote={product.manufacturingNote}

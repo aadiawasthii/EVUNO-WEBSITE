@@ -20,10 +20,12 @@ export type SeedProduct = {
   imageUrl: string;
   posterUrl: string;
   videoUrl?: string;
+  videoMp4Url?: string;
   videoScale?: number;
   videoPlaybackRate?: number;
   frontStillUrl: string;
   backStillUrl: string;
+  fabricDetailUrl: string;
   color: string;
   tagline: string;
   featureHighlights: string[];
@@ -57,6 +59,18 @@ export function getSeries01RunnerByColor(color: string) {
   }
 }
 
+export function getSeries01FabricDetailByColor(color: string) {
+  switch (color.toLowerCase()) {
+    case "forest":
+      return "/assets/products/editorial/fabric-detail-forest.png";
+    case "cobalt":
+      return "/assets/products/editorial/fabric-detail-cobalt.png";
+    case "onyx":
+    default:
+      return "/assets/products/editorial/fabric-detail.png";
+  }
+}
+
 function buildVariants(baseSku: string, color: string): SeedVariant[] {
   return PRODUCT_SIZES.map((size) => ({
     id: `${baseSku}-${size.toLowerCase()}`,
@@ -79,10 +93,12 @@ export const seedProducts: SeedProduct[] = [
     imageUrl: "/assets/products/stills/forest-front.png",
     posterUrl: "/assets/products/stills/forest-front.png",
     videoUrl: "/assets/products/series-01-forest.webm",
+    videoMp4Url: "/assets/products/series-01-forest.mp4",
     videoScale: 1,
     videoPlaybackRate: 1.12,
     frontStillUrl: "/assets/products/stills/forest-front.png",
     backStillUrl: "/assets/products/stills/forest-back.png",
+    fabricDetailUrl: "/assets/products/editorial/fabric-detail-forest.png",
     color: "Forest",
     tagline: "Field-tone performance knit with controlled reflectivity and a quieter visual footprint.",
     featureHighlights: [
@@ -117,10 +133,12 @@ export const seedProducts: SeedProduct[] = [
     imageUrl: "/assets/products/stills/onyx-front.png",
     posterUrl: "/assets/products/stills/onyx-front.png",
     videoUrl: "/assets/products/series-01-onyx.webm",
+    videoMp4Url: "/assets/products/series-01-onyx.mp4",
     videoScale: 1,
     videoPlaybackRate: 1.12,
     frontStillUrl: "/assets/products/stills/onyx-front.png",
     backStillUrl: "/assets/products/stills/onyx-back.png",
+    fabricDetailUrl: "/assets/products/editorial/fabric-detail.png",
     color: "Onyx",
     tagline: "Stealth-first finish with the sharpest EVUNO light response.",
     featureHighlights: [
@@ -155,10 +173,12 @@ export const seedProducts: SeedProduct[] = [
     imageUrl: "/assets/products/stills/cobalt-front.png",
     posterUrl: "/assets/products/stills/cobalt-front.png",
     videoUrl: "/assets/products/series-01-cobalt.webm",
+    videoMp4Url: "/assets/products/series-01-cobalt.mp4",
     videoScale: 1,
     videoPlaybackRate: 1.12,
     frontStillUrl: "/assets/products/stills/cobalt-front.png",
     backStillUrl: "/assets/products/stills/cobalt-back.png",
+    fabricDetailUrl: "/assets/products/editorial/fabric-detail-cobalt.png",
     color: "Cobalt",
     tagline: "High-contrast cobalt built to read faster, brighter, and more technical.",
     featureHighlights: [

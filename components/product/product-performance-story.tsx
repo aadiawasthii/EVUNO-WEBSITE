@@ -4,7 +4,7 @@ import { series01Editorial } from "@/lib/catalog";
 import type { StoreProduct } from "@/lib/storefront";
 
 type ProductPerformanceStoryProps = {
-  product: Pick<StoreProduct, "color" | "material" | "manufacturingNote">;
+  product: Pick<StoreProduct, "color" | "material" | "manufacturingNote" | "fabricDetailUrl">;
 };
 
 const performanceNotes = [
@@ -70,8 +70,8 @@ export function ProductPerformanceStory({ product }: ProductPerformanceStoryProp
         <article className="glass-panel overflow-hidden">
           <div className="relative aspect-[5/4]">
             <Image
-              src={series01Editorial.fabricDetailUrl}
-              alt="Series 01 performance fabric close-up"
+              src={product.fabricDetailUrl}
+              alt={`${product.color} Series 01 performance fabric close-up`}
               fill
               sizes="(max-width: 1024px) 100vw, 36vw"
               className="object-cover"

@@ -28,6 +28,7 @@ type ProductModelViewerProps = {
   hasModel: boolean;
   modelUrl: string;
   videoUrl?: string;
+  videoMp4Url?: string;
   videoScale?: number;
   videoPlaybackRate?: number;
   className?: string;
@@ -39,15 +40,26 @@ export function ProductModelViewer({
   hasModel,
   modelUrl,
   videoUrl,
+  videoMp4Url,
   videoScale = 1,
   videoPlaybackRate = 1.12,
   className
 }: ProductModelViewerProps) {
   const reduceMotion = useReducedMotion();
+  const [preferLightweightVideo, setPreferLightweightVideo] = useState(false);
   const [hasError, setHasError] = useState(!hasModel);
 
   useEffect(() => {
     void import("@google/model-viewer");
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setPreferLightweightVideo(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
   }, []);
 
   if (videoUrl) {
@@ -57,12 +69,21 @@ export function ProductModelViewer({
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,transparent_20%,rgba(255,255,255,0.05)_48%,transparent_72%)] opacity-70 mix-blend-screen" />
         {reduceMotion ? (
           <Image src={fallbackImage} alt={alt} fill className="object-contain p-6" sizes="(max-width: 768px) 100vw, 40vw" />
+        ) : preferLightweightVideo ? (
+          <NativeLoopVideo
+            alt={alt}
+            fallbackImage={fallbackImage}
+            videoUrl={videoUrl}
+            videoMp4Url={videoMp4Url}
+            videoScale={videoScale}
+          />
         ) : (
           <SmoothLoopVideo
             key={videoUrl}
             alt={alt}
             fallbackImage={fallbackImage}
             videoUrl={videoUrl}
+            videoMp4Url={videoMp4Url}
             videoScale={videoScale}
             videoPlaybackRate={videoPlaybackRate}
           />
@@ -106,6 +127,7 @@ type SmoothLoopVideoProps = {
   alt: string;
   fallbackImage: string;
   videoUrl: string;
+  videoMp4Url?: string;
   videoScale: number;
   videoPlaybackRate: number;
 };
@@ -114,6 +136,7 @@ function SmoothLoopVideo({
   alt,
   fallbackImage,
   videoUrl,
+  videoMp4Url,
   videoScale,
   videoPlaybackRate
 }: SmoothLoopVideoProps) {
@@ -297,8 +320,44 @@ function SmoothLoopVideo({
           }}
         >
           <source src={videoUrl} type="video/webm" />
+          {videoMp4Url ? <source src={videoMp4Url} type="video/mp4" /> : null}
         </video>
       ))}
+    </div>
+  );
+}
+
+function NativeLoopVideo({
+  alt,
+  fallbackImage,
+  videoUrl,
+  videoMp4Url,
+  videoScale
+}: {
+  alt: string;
+  fallbackImage: string;
+  videoUrl: string;
+  videoMp4Url?: string;
+  videoScale: number;
+}) {
+  return (
+    <div className="relative z-10 h-full w-full" aria-label={alt}>
+      <video
+        className="absolute inset-0 h-full w-full origin-center object-cover"
+        muted
+        loop
+        autoPlay
+        playsInline
+        preload="metadata"
+        poster={fallbackImage}
+        disablePictureInPicture
+        style={{
+          transform: `scale(${videoScale})`
+        }}
+      >
+        <source src={videoUrl} type="video/webm" />
+        {videoMp4Url ? <source src={videoMp4Url} type="video/mp4" /> : null}
+      </video>
     </div>
   );
 }

@@ -19,6 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
             hasModel={product.hasModel}
             modelUrl={product.modelUrl}
             videoUrl={product.videoUrl}
+            videoMp4Url={product.videoMp4Url}
             videoScale={product.videoScale}
             videoPlaybackRate={product.videoPlaybackRate}
             className="aspect-square"

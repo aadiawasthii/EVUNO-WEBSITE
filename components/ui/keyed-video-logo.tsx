@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -34,8 +34,22 @@ export function KeyedVideoLogo({
 }: KeyedVideoLogoProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [preferDirectVideo, setPreferDirectVideo] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const update = () => setPreferDirectVideo(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (preferDirectVideo) {
+      return;
+    }
+
     const video = videoRef.current as KeyableVideoElement | null;
     const canvas = canvasRef.current;
 
@@ -234,7 +248,24 @@ export function KeyedVideoLogo({
         window.cancelAnimationFrame(rafId);
       }
     };
-  }, [playbackRate, softness, src, startOnScroll, stillFrameTime, threshold]);
+  }, [playbackRate, preferDirectVideo, softness, src, startOnScroll, stillFrameTime, threshold]);
+
+  if (preferDirectVideo) {
+    return (
+      <div className={cn("relative", className)}>
+        <video
+          className="h-full w-full object-contain mix-blend-screen [filter:brightness(1.16)_contrast(1.22)_saturate(0.96)_drop-shadow(0_0_20px_rgba(255,255,255,0.14))]"
+          src={src}
+          poster={poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={cn("relative", className)}>

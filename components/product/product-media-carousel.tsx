@@ -16,6 +16,7 @@ type ProductMediaCarouselProps = {
   hasModel: boolean;
   modelUrl: string;
   videoUrl?: string;
+  videoMp4Url?: string;
   videoScale?: number;
   videoPlaybackRate?: number;
   frontStillUrl: string;
@@ -33,6 +34,7 @@ export function ProductMediaCarousel({
   hasModel,
   modelUrl,
   videoUrl,
+  videoMp4Url,
   videoScale,
   videoPlaybackRate,
   frontStillUrl,
@@ -212,6 +214,7 @@ export function ProductMediaCarousel({
               hasModel={hasModel}
               modelUrl={modelUrl}
               videoUrl={videoUrl}
+              videoMp4Url={videoMp4Url}
               videoScale={videoScale}
               videoPlaybackRate={videoPlaybackRate}
               className="aspect-square"
